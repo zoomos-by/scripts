@@ -85,11 +85,11 @@ foreach ($arr as $key => $row)
 				if (strpos($row['image_url'], '|') !== false) {
 					$row['image_url'] = substr($row['image_url'], 0, strpos($row['image_url'], '|'));
 				}
-				$row[$value]="http://home.agroup.by/uploads/".trim($row['image_url'],"/");
+				$row[$value]="http://yourshop.com/uploads/".trim($row['image_url'],"/");
 			}
 
 		if ($value=="url")
-			{$row[$value]="http://home.agroup.by/".trim($row['cat_parent'],"/").'/'.trim($row['cat_url'],"/").'/'.trim($row['url'],"/");}
+			{$row[$value]="http://yourshop.com/".trim($row['cat_parent'],"/").'/'.trim($row['cat_url'],"/").'/'.trim($row['url'],"/");}
 		
 		$csv_doc.= '"'.iconv($charset, 'cp1251', $row[$value]).'";';
 		}
