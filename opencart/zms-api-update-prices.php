@@ -7,11 +7,11 @@ require "config.php";
 
 echo 'Connecting to DB'. '<br/>';
 
-$conn=mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die ("Не могу создать соединение");
+$conn=mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die ("ГЌГҐ Г¬Г®ГЈГі Г±Г®Г§Г¤Г ГІГј Г±Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГҐ");
 mysql_select_db(DB_DATABASE) or die (mysql_error());
 
-
-$url = 'http://export.zoomos.by/api/pricelist?key=';
+$ZMS_KEY = ''; //zoomos api key
+$url = 'http://export.zoomos.by/api/pricelist?key='.$ZMS_KEY;
 
 echo 'Downloading JSON from '.$url. '<br/>';
 
