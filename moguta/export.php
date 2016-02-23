@@ -5,11 +5,8 @@ ini_set('display_errors', '1');
 ini_set('memory_limit', '500M');
 set_time_limit(60*59);
 
-define('HOST' , "localhost");
-define('USER' , "agroupby_klimati");
-define('PASSWORD' , "6382207");
-define('NAME_BD' , "agroupby_klimatika");
-define("TABLE_PREFIX", "mg_");
+require "mg-core/lib/mg.php";
+MG::getConfigIni();
 
  // Параметры базы 
 $charset='utf8';
@@ -39,35 +36,21 @@ $Fields=array(
 	"id"				=>	"id",
 	"Производитель"			=>	"category",
 	"Категория"			=>	"parent",
-	"Модель"		=>	"title",
+	"Модель"			=>	"title",
 	"Цена"				=>	"price",
 	"Активность"			=>	"status",
-	"Ссылка на товар"				=>	"url",
+	"Ссылка на товар"		=>	"url",
 	"Рисунок"			=>	"image_url",
 	"Артикул"			=>	"art"
 
 );
 
-
-
-// Подключаем класс для работы с excel
-// require_once('./Classes/PHPExcel.php');
-// Подключаем класс для вывода данных в формате excel
-// require_once('./Classes/PHPExcel/Writer/Excel5.php');
- // Создаем соединение 
+// Создаем соединение 
 $conn=mysql_connect(HOST, USER, PASSWORD) or die ("Не могу создать соединение");
 // Ставим чарсет на UTF8
 mysql_query("SET character_set_results = '$charset', character_set_client = '$charset', character_set_connection = '$charset', character_set_database = '$charset', character_set_server = '$charset'", $conn);
 // Выбираем базу данных. Если произойдет ошибка - вывести ее 
 mysql_select_db(NAME_BD) or die (mysql_error());
-
-/* Инициализируем Excel 
-$xls = new PHPExcel();				// Создаем объект класса PHPExcel
-$xls->setActiveSheetIndex(0);		// Устанавливаем индекс активного листа
-$sheet = $xls->getActiveSheet();	// Получаем активный лист
-$sheet->setTitle($TableName);		// Подписываем лист
-for ($i=0; $i < sizeof($XLSFields); $i++) {if ($i<=25) {$sheet->getColumnDimension(chr($i+65))->setAutoSize(true);} }  // Устанавливаем автоширину
-*/
 
 /* Записываем оглавление */
 $i=0;
@@ -81,17 +64,13 @@ $csv_doc=rtrim($csv_doc,";")."\n";
 
 $result=mysql_query($query); 
 
-
 if (mysql_errno()) { 
   echo "MySQL error ".mysql_errno().": ".mysql_error()."\n<br>When executing:<br>\n$query\n<br>"; 
   
 } 
 
-
-
 while ($row = mysql_fetch_array($result)) {$arr[]=$row;}
 
-// echo "<h1 style='color:red;'>DATA :</h1><pre>";print_r($arr);echo "</pre><hr>";exit();
 $i=1;
 foreach ($arr as $key => $row) 
 {
@@ -118,7 +97,6 @@ foreach ($arr as $key => $row)
 	$csv_doc=rtrim($csv_doc,";")."\n";
 }
 
-// Сохраняем лист и предлагаем загрузить 
 	// Выводим HTTP-заголовки
 	 header ( "Expires: Mon, 1 Apr 1974 05:00:00 GMT" );
 	 header ( "Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT" );
@@ -127,9 +105,6 @@ foreach ($arr as $key => $row)
 	 header ( "Content-type: text/csv" );
 	 header ( "Content-Disposition: attachment; filename=$TableName" );
 
-	 // Выводим содержимое файла
-	  // $objWriter = new PHPExcel_Writer_Excel5($xls);
-	  // $objWriter->save('php://output');
 	 echo $csv_doc;
 
 mysql_close($conn);
