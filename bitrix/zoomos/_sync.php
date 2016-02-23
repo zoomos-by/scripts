@@ -1,0 +1,1 @@
+<?php $_SERVER['DOCUMENT_ROOT']="/home/sklad24b/public_html";require_once($_SERVER['DOCUMENT_ROOT']."/bitrix/modules/main/include/prolog_before.php");\CModule::IncludeModule("zoomos");\ZmsSync::doIt();?>

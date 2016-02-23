@@ -1,0 +1,1 @@
+<?define('ZMS_UPDATE','1');define('ZMS_VERSION','1.0.0');?>
