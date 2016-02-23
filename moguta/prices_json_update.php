@@ -1,15 +1,13 @@
 <?php 
+
+require "mg-core/lib/mg.php";
+MG::getConfigIni();
+
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 ini_set('memory_limit', '500M');
 set_time_limit(60*59);
-
-define('HOST' , "localhost");
-define('USER' , "agroupby_klimati");
-define('PASSWORD' , "6382207");
-define('NAME_BD' , "agroupby_klimatika");
-define("TABLE_PREFIX", "mg_");
 
 $link = mysql_connect(HOST, USER, PASSWORD);
 if (!$link) 
@@ -20,9 +18,8 @@ mysql_set_charset("utf-8",$link);
 
 $sql_log="";
 
-
 //---------------------- IMPORT SETTINGS -----------------------------
-$zms_key="home.agroup-OECAUGPM2";
+$zms_key=""; //zoomos api key
 $zms_base_url="http://export.zoomos.by/api/pricelist?key=";
 
 $debug_mode=false;
