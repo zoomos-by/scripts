@@ -1,6 +1,6 @@
 <?
 	define('PRODUCTS_BLOCK_ID', 999); // ID информационного блока с товарами
-	define('ZMS_KEY','teplodomov.by-592Tyk45zuVV'); // Ключ ZOOMOS API
+	define('ZMS_KEY','api-key'); // Ключ ZOOMOS API
 	define('ZMS_JSON_LINK','http://export.zoomos.by/api/');
 	define('ZMS_CACHE_DIR','zoomos');define('ZMS_CACHE_JSON','172800');
 	define('ZMS_SECTION_IMG_SIZE','236x236');
