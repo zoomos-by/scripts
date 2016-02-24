@@ -2,7 +2,7 @@
 	if(isset($_GET[ZMS_SECTION_CODE])) $GLOBALS['R'][ZMS_SECTION_CODE] = $_GET[ZMS_SECTION_CODE];
 	if(isset($_GET[ZMS_ELEMENT_CODE])) $GLOBALS['R'][ZMS_ELEMENT_CODE] = $_GET[ZMS_ELEMENT_CODE];
 
-	class ZmsJson {
+	class ZmsJson {PRODUCTS_BLOCK_ID
 		public static function get($link='',$cache=true,$filter=false){
 			
 			if($filter) 
@@ -336,7 +336,7 @@
 		public static function exportExtFile(){
 			$priceId = static::getBasePrice();
             
-			$lDb = \CIBlockSection::GetList(array(),array('IBLOCK_ID'=>static::getBlockID()),false,array('IBLOCK_ID','ID','NAME'));
+			$lDb = \CIBlockSection::GetList(array(),array('IBLOCK_ID'=>PRODUCTS_BLOCK_ID),false,array('IBLOCK_ID','ID','NAME'));
 			while($s = $lDb->fetch()) $sections[$s['ID']] = $s['NAME'];
 			
 			//'IBLOCK_ID'=>static::getBlockID()
