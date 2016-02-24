@@ -2,7 +2,7 @@
 	if(isset($_GET[ZMS_SECTION_CODE])) $GLOBALS['R'][ZMS_SECTION_CODE] = $_GET[ZMS_SECTION_CODE];
 	if(isset($_GET[ZMS_ELEMENT_CODE])) $GLOBALS['R'][ZMS_ELEMENT_CODE] = $_GET[ZMS_ELEMENT_CODE];
 
-	class ZmsJson {PRODUCTS_BLOCK_ID
+	class ZmsJson {
 		public static function get($link='',$cache=true,$filter=false){
 			
 			if($filter) 
