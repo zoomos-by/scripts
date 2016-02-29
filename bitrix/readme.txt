@@ -9,7 +9,7 @@
 
 
 http://yourshop.com/_export.php
-http://yourshop.com/_update_zms.php
+http://yourshop.com/_zms_update.php
 
 
 
