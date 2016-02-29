@@ -420,7 +420,7 @@
 					echo 'update '.$a->shopsId,', price = '.$a->price.', <br/>';
 				
 					\CPrice::SetBasePrice($arBase[$a->shopsId]['ID'],$a->price,$a->priceCurrency);
-					\CCatalogProduct::Update($arBase[$a->shopsId]['ID'],array('QUANTITY'=>1));
+					\CCatalogProduct::Update($arBase[$a->shopsId]['ID'],array('QUANTITY'=>100));
 					unset($arBase[$a->shopsId]);
 				}
 			}
