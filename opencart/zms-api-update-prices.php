@@ -44,7 +44,7 @@ foreach ($obj as $key => $row)
 
 	if ($id) {
 
-		$q = "update oc_product set status = ".($status == 1 && $price > 0 ? "1" : "0").", price = ".$price." where sku = ".$id;
+		$q = "update ".DB_PREFIX."product set status = ".($status == 1 && $price > 0 ? "1" : "0").", price = ".$price." where sku = ".$id;
 		
 		executeUpdate($q, $conn);
 				
