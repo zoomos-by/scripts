@@ -37,14 +37,15 @@ foreach ($obj as $key => $row)
 {
 
 	$id = $row['id'];
+	$shopsId = $row['shopsId'];
 	$status = $row['status'];
 	$price = $row['price'];
 
 	echo $i . ' of '.sizeof($obj). ': ' . $id .  '<br/>';
 
-	if ($id) {
+	if ($shopsId) {
 
-		$q = "update ".DB_PREFIX."product set status = ".($status == 1 && $price > 0 ? "1" : "0").", price = ".$price." where sku = ".$id;
+		$q = "update ".DB_PREFIX."product set status = ".($status == 1 && $price > 0 ? "1" : "0").", price = ".$price." where product_id = ".$shopsId;
 		
 		executeUpdate($q, $conn);
 				
