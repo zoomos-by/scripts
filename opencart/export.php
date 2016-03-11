@@ -8,8 +8,6 @@ require "config.php";
  // Параметры базы 
 $charset='utf8';
 
-
-
 	$query="	SELECT p.product_id AS id,  m.name as vendor, p.model, coalesce(ps.price, p.price ) as price,   
 			       p.image AS image_url, p.status, cat.name AS category, ua.keyword as url, ua2.keyword as url2, pdescr.name as full_name, concat_ws(' ', pdescr.name, m.name, p.model) as full_model,
 			       p.stock_status_id, quantity 
@@ -49,7 +47,6 @@ $Fields=array(
 	"quantity"			=>	"quantity"
 );
 
-
 // Создаем соединение 
 $conn=mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die ("Не могу создать соединение");
 // Ставим чарсет на UTF8
@@ -57,14 +54,9 @@ mysql_query("SET character_set_results = '$charset', character_set_client = '$ch
 // Выбираем базу данных. Если произойдет ошибка - вывести ее 
 mysql_select_db(DB_DATABASE) or die (mysql_error());
 
-
-
 $result=mysql_query($query); 
-
 $csv_doc = '';
-
 while ($row = mysql_fetch_array($result)) {$arr[]=$row;}
-
 
 $i=1;
 $urls=array();
@@ -93,9 +85,6 @@ foreach ($arr as $key => $row)
 	 header ( "Content-type: text/csv" );
 	 header ( "Content-Disposition: attachment; filename=$TableName" );
 
-	 // Выводим содержимое файла
-	  // $objWriter = new PHPExcel_Writer_Excel5($xls);
-	  // $objWriter->save('php://output');
 	 echo $csv_doc;
 
 
