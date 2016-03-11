@@ -1,8 +1,7 @@
 <?php 
 
-
-//error_reporting(E_ALL | E_STRICT) ;
-//ini_set('display_errors', 'On');
+// error_reporting(E_ALL | E_STRICT) ;
+// ini_set('display_errors', 'On');
 
 require "config.php";
 
@@ -50,6 +49,7 @@ $Fields=array(
 	"quantity"			=>	"quantity"
 );
 
+
 // Создаем соединение 
 $conn=mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die ("Не могу создать соединение");
 // Ставим чарсет на UTF8
@@ -57,11 +57,14 @@ mysql_query("SET character_set_results = '$charset', character_set_client = '$ch
 // Выбираем базу данных. Если произойдет ошибка - вывести ее 
 mysql_select_db(DB_DATABASE) or die (mysql_error());
 
+
+
 $result=mysql_query($query); 
 
 $csv_doc = '';
 
 while ($row = mysql_fetch_array($result)) {$arr[]=$row;}
+
 
 $i=1;
 $urls=array();
@@ -76,13 +79,13 @@ foreach ($arr as $key => $row)
 			if ($key=='price') {
 				$csv_doc.= intval($row[$value]).';';
 			} else {
-				$csv_doc.= '"'.str_replace('"', '""', iconv($charset, 'cp1251', $row[$value] ) ).'";';}
+				$csv_doc.= '"'.str_replace('"', '""', iconv($charset, 'cp1251', $row[$value] ) ).'";';
 			}
 		}
 	$csv_doc[strlen($csv_doc)-1]="\n";
 }
 
-	// Выводим HTTP-заголовки
+	 // Выводим HTTP-заголовки
 	 header ( "Expires: Mon, 1 Apr 1974 05:00:00 GMT" );
 	 header ( "Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT" );
 	 header ( "Cache-Control: no-cache, must-revalidate" );
@@ -94,6 +97,7 @@ foreach ($arr as $key => $row)
 	  // $objWriter = new PHPExcel_Writer_Excel5($xls);
 	  // $objWriter->save('php://output');
 	 echo $csv_doc;
+
 
 mysql_close($conn);
 
