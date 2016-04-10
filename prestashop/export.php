@@ -73,7 +73,7 @@ $i=1;
 $urls=array();
 foreach ($arr as $key => $row) {
 
-	$reduct_query="SELECT * FROM  `yd_specific_price` WHERE id_product =".$row['id'];
+	$reduct_query="SELECT * FROM "._DB_PREFIX_."specific_price WHERE id_product =".$row['id'];
 	$reduct_result=mysql_query($reduct_query); 
 	while ($reduct_row = mysql_fetch_array($reduct_result))
 	{
