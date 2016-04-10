@@ -7,7 +7,7 @@ $charset='utf8';
 $filter="";
  // Пишем запросик для канала 		
  if (isset($_GET['active']) && $_GET['active']==1) {
- 	$filter=" WHERE (p.available_for_order=1 or p.online_only = 1); 
+ 	$filter=" WHERE (p.available_for_order=1 or p.online_only = 1) "; 
 }
 
 	$query="	
@@ -95,7 +95,6 @@ foreach ($arr as $key => $row) {
 			  $csv_doc.= intval($row[$value]).';';
 			} else {
 			  $csv_doc.= '"'.str_replace('"', '""', iconv($charset, 'cp1251', $row[$value] )).'";';
-			}
 			}
 		}
 	$csv_doc[strlen($csv_doc)-1]="\n";
