@@ -10,7 +10,7 @@ echo 'Connecting to DB'. '<br/>';
 $conn=mysql_connect(_DB_SERVER_, _DB_USER_, _DB_PASSWD_) or die ("Не могу создать соединение");
 mysql_select_db(_DB_NAME_) or die (mysql_error());
 
-$ZMS_KEY = '';
+$ZMS_KEY = ''; // API KEY
 $url = 'http://export.zoomos.by/api/pricelist?key='.$ZMS_KEY;
 
 echo 'Downloading JSON from '.$url. '<br/>';
@@ -36,35 +36,37 @@ $ids = array();
 foreach ($obj as $key => $row) 
 {
 
-	$id = $row['id'];
+	$id = $row['id'];  // zoomos ID
+	$shopsId = $row['shopsId'];
 	$status = $row['status'];
 	$price = $row['price'];
 
 	echo $i . ' of '.sizeof($obj). ': ' . $id .  '<br/>';
 
-	if ($id) {
+	if ($shopsId) {
 
-		$q = "update product set active = ".($status == 1 ? "1" : "0").", price = ".$price." where zoomos_id = ".$id;
+		$q = "update "._DB_PREFIX_."product set active = ".($status == 1 ? "1" : "0").", price = ".$price." where id_product = ".$shopsId;
 		
 		executeUpdate($q, $conn);
 				
-		$q = "update product_shop set price = ".$price.", wholesale_price = ".$price.", active = ".($status == 1 ? "1" : "0").", date_upd = current_timestamp where zoomos_id = ".$id;
+		$q = "update "._DB_PREFIX_."product_shop set price = ".$price.", wholesale_price = ".$price.", active = ".($status == 1 ? "1" : "0").", date_upd = current_timestamp where id_product = ".$shopsId;
 		
 		executeUpdate($q, $conn);
 		
 
-		array_push($ids, $id);
+		array_push($ids, $shopsId);
 	}
 
 	
 	$i++;
 }
+	// disable other
+	
+	//$q = "update "._DB_PREFIX_."product set active = 0 where id_product not in (".implode(",", $ids).")";
+	//executeUpdate($q, $conn);
 
-	$q = "update product set active = 0 where zoomos_id not in (".implode(",", $ids).")";
-	executeUpdate($q, $conn);
-
-	$q = "update product_shop set active = 0 where zoomos_id not in (".implode(",", $ids).")";
-	executeUpdate($q, $conn);
+	//$q = "update "._DB_PREFIX_."product_shop set active = 0 where id_product not in (".implode(",", $ids).")";
+	//executeUpdate($q, $conn);
 
 
 
