@@ -45,14 +45,14 @@ foreach ($obj as $key => $row)
 
 	if ($shopsId) {
 
-		$q = "update "._DB_PREFIX_."product set active = ".($status == 1 ? "1" : "0").", price = ".$price." where id_product = ".$shopsId;
-		
+		$q = "update "._DB_PREFIX_."product set active = ".($status == 1 ? "1" : "0").", price = ".$price.", quantity = 100 where id_product = ".$shopsId;
 		executeUpdate($q, $conn);
 				
 		$q = "update "._DB_PREFIX_."product_shop set price = ".$price.", wholesale_price = ".$price.", active = ".($status == 1 ? "1" : "0").", date_upd = current_timestamp where id_product = ".$shopsId;
-		
 		executeUpdate($q, $conn);
 		
+		$q = "update "._DB_PREFIX_."stock_available set quantity = 100 where id_product = ".$shopsId;
+		executeUpdate($q, $conn);
 
 		array_push($ids, $shopsId);
 	}
