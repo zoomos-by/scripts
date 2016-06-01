@@ -20,7 +20,7 @@ $sql_log="";
 
 //---------------------- IMPORT SETTINGS -----------------------------
 $zms_key=""; //zoomos api key
-$zms_base_url="http://export.zoomos.by/api/pricelist?key=";
+$zms_base_url="http://api.export.zoomos.by/pricelist?key=";
 
 $debug_mode=false;
 $table_prefix=TABLE_PREFIX;
