@@ -4,14 +4,14 @@ require "configuration.php";
 echo 'Connecting to DB'. '<br/>';
 
 $config = new JConfig();
-$conn=mysql_connect('localhost', $config->user, $config->password) or die ("Íå ìîãó ñîçäàòü ñîåäèíåíèå");
+$conn=mysql_connect('localhost', $config->user, $config->password) or die ("ÃÃ¥ Ã¬Ã®Ã£Ã³ Ã±Ã®Ã§Ã¤Ã Ã²Ã¼ Ã±Ã®Ã¥Ã¤Ã¨Ã­Ã¥Ã­Ã¨Ã¥");
 mysql_select_db($config->db) or die (mysql_error());
 
 
 
 $ZMS_KEY=''; //zoomos api key
 
-$url = 'http://export.zoomos.by/api/pricelist?key='.$ZMS_KEY;
+$url = 'http://api.export.zoomos.by/pricelist?key='.$ZMS_KEY;
 
 echo 'Downloading JSON from '.$url. '<br/>';
 
