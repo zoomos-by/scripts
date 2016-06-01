@@ -11,7 +11,7 @@ $conn=mysql_connect(_DB_SERVER_, _DB_USER_, _DB_PASSWD_) or die ("Не могу 
 mysql_select_db(_DB_NAME_) or die (mysql_error());
 
 $ZMS_KEY = ''; // API KEY
-$url = 'http://export.zoomos.by/api/pricelist?key='.$ZMS_KEY;
+$url = 'http://api.export.zoomos.by/pricelist?key='.$ZMS_KEY;
 
 echo 'Downloading JSON from '.$url. '<br/>';
 
