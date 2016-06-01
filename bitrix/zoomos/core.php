@@ -202,7 +202,7 @@
         public static function getImageById($id){
             if($id == false) return '';
             $a = \CIBlockElement::GetList(Array("SORT"=>"ASC"),Array('ID'=>$id),false,array('nTopCount'=>1),Array('ID','CODE','IBLOCK_ID','XML_ID'))->fetch();
-            return 'http://export.zoomos.by/api/img/item/'.$a['CODE'].'/0';
+            return 'http://api.export.zoomos.by/img/item/'.$a['CODE'].'/0';
         }
         public static function getDetailText($id){
             $i = ZmsJson::getItem($id);
@@ -210,7 +210,7 @@
 			return $i->fullDescriptionHTML;
         }
         public static function getImage($id){
-            return 'http://export.zoomos.by/api/img/item/'.$id.'/0';
+            return 'http://api.export.zoomos.by/img/item/'.$id.'/0';
         }
         public static function getImages($id){
             $i = ZmsJson::getItem($id);
@@ -659,7 +659,7 @@
 					'CATALOG_AVAILABLE' => 'Y',
 					'PREVIEW_TEXT' => $k,
 					'PREVIEW_PICTURE' => array(
-						'SRC' => 'http://export.zoomos.by/api/img/item/'.$a->id.'/main/resize/'.ZMS_SECTION_IMG_SIZE.'.jpg',	  	
+						'SRC' => 'http://api.export.zoomos.by/img/item/'.$a->id.'/main/resize/'.ZMS_SECTION_IMG_SIZE.'.jpg',	  	
 					),
 					'PRICES' => array(
 						array(
