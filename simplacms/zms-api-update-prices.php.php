@@ -51,8 +51,8 @@ foreach ($obj as $key => $row)
 
 	if ($shopsId) {
 
-		$q = "update ".$config->db_prefix."variants set active = ".($status == 1 && $price > 0 ? "1" : "0").", price = ".$price." where id = ".$shopsId;
-		
+		$q = "update ".$config->db_prefix."variants set price = ".$price." where id = ".$shopsId;
+		//active = ".($status == 1 && $price > 0 ? "1" : "0").", 
 		executeUpdate($q, $conn);
 				
 //		$q = "update product_shop set price = ".$price.", wholesale_price = ".$price.", active = ".($status == 1 && $price > 0 ? "1" : "0").", date_upd = current_timestamp where zoomos_id = ".$id;
