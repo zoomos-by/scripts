@@ -19,7 +19,7 @@ define('HTTP_SERVER', $_SERVER['HTTP_HOST']);
 
 echo 'Connecting to DB'. '<br/>';
 
-$conn=mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die ("Íå ìîãó ñîçäàòü ñîåäèíåíèå");
+$conn=mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die ("couldn't connect to database");
 mysql_select_db(DB_DATABASE) or die (mysql_error());
 
 $ZMS_KEY = ''; //zoomos api key
