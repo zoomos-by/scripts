@@ -8,19 +8,13 @@ define( 'BASEPATH', true );
 //error_reporting(E_ALL | E_STRICT) ;
 //ini_set('display_errors', 'On');
 
-require "application/config/database.php";
-
-define('DB_PREFIX', $db['default']['dbprefix']);
-define('DB_DATABASE', $db['default']['database']);
-define('DB_USERNAME', $db['default']['username']);
-define('DB_PASSWORD', $db['default']['password']);
-define('DB_HOSTNAME', $db['default']['hostname']);
-define('HTTP_SERVER', $_SERVER['HTTP_HOST']);
+require_once('api/Config.php');
+$config = new Config();
 
 echo 'Connecting to DB'. '<br/>';
 
-$conn=mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die ("Íå ìîãó ñîçäàòü ñîåäèíåíèå");
-mysql_select_db(DB_DATABASE) or die (mysql_error());
+$conn=mysql_connect($config->db_server, $config->db_user, $config->db_password) or die ("couldn't connect to database");
+mysql_select_db($config->db_name) or die (mysql_error());
 
 $ZMS_KEY = ''; //zoomos api key
 $url = 'http://api.export.zoomos.by/pricelist?key='.$ZMS_KEY;
@@ -57,7 +51,7 @@ foreach ($obj as $key => $row)
 
 	if ($shopsId) {
 
-		$q = "update ".DB_PREFIX."variants set active = ".($status == 1 && $price > 0 ? "1" : "0").", price = ".$price." where id = ".$shopsId;
+		$q = "update ".$config->db_prefix."variants set active = ".($status == 1 && $price > 0 ? "1" : "0").", price = ".$price." where id = ".$shopsId;
 		
 		executeUpdate($q, $conn);
 				
