@@ -51,7 +51,7 @@ foreach ($obj as $key => $row)
 
 	if ($shopsId) {
 
-		$q = "update ".$config->db_prefix."variants set price = ".$price." where id = ".$shopsId;
+		$q = "update ".$config->db_prefix."variants set price = ".$price." where product_id = ".$shopsId;
 		//active = ".($status == 1 && $price > 0 ? "1" : "0").", 
 		executeUpdate($q, $conn);
 				
