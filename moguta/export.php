@@ -98,7 +98,7 @@ foreach ($arr as $key => $row)
 		$csv_doc.= '"'.iconv($charset, 'cp1251', $row[$value]).'";';
 		}
 	}
-	$csv_doc=rtrim($csv_doc,";")."\n";
+	$csv_doc .= "\n"; //rtrim($csv_doc,";")
 }
 
 	// Выводим HTTP-заголовки
