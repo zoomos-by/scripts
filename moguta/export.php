@@ -5,6 +5,10 @@ ini_set('display_errors', '1');
 ini_set('memory_limit', '500M');
 set_time_limit(60*59);
 
+ini_set('max_execution_time', 60 * 15);
+
+ini_set('default_socket_timeout', 60 * 15);
+
 require "mg-core/lib/mg.php";
 MG::getConfigIni();
 
