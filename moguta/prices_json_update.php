@@ -9,6 +9,8 @@ ini_set('display_errors', '1');
 ini_set('memory_limit', '500M');
 set_time_limit(60*60);
 
+ini_set('max_execution_time', 900);
+
 ini_set('default_socket_timeout', 900);
 
 $link = mysql_connect(HOST, USER, PASSWORD);
