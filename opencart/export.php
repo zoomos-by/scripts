@@ -78,7 +78,7 @@ foreach ($arr as $key => $row)
 			if ($key=="url"){$row[$value]=trim(HTTP_SERVER.($row['url2'] ? $row['url2'].'/' : '').$row['url']).'?product_id='.$row['id'];}
 
 			if ($key=='price') {
-				$csv_doc.= intval($row[$value]).';';
+				$csv_doc.= $row[$value].';';
 			} else {
 				$csv_doc.= '"'.str_replace('"', '""', iconv($charset, 'cp1251', $row[$value] ) ).'";';
 			}
