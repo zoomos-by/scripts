@@ -23,7 +23,6 @@ $charset='utf8';
 				LEFT JOIN ".DB_PREFIX."url_alias as ua2 ON ua2.query=CONCAT('category_id=',cat2.parent_id)
 				LEFT JOIN ".DB_PREFIX."manufacturer AS m ON m.manufacturer_id = p.manufacturer_id
 				LEFT JOIN ".DB_PREFIX."product_special AS ps ON ps.product_id = p.product_id and ps.price > 0 and date_start <= now() and date_end >= now()
-				where cat.name not like '%ПРЕДЗАКАЗ%' and pdescr.name not like '%СКИДКА ВСЕМ%'  and quantity > 0
 				group by p.product_id 
 	";
 
