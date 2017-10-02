@@ -45,7 +45,7 @@ foreach ($obj as $key => $row)
 
 	if ($shopsId) {
 
-		$q = "update ".DB_PREFIX."product set status = ".($status == 1 && $price > 0 ? "1" : "0").", price = ".$price." where product_id = ".$shopsId;
+		$q = "update ".DB_PREFIX."product set status = ".($status == 1 && $price > 0 ? "1" : "0").", quantity = 100, price = ".$price." where product_id = ".$shopsId;
 		
 		executeUpdate($q, $conn);
 				
@@ -61,7 +61,7 @@ foreach ($obj as $key => $row)
 	$i++;
 }
 
-	$q = "update product set active = 0 where zoomos_id not in (".implode(",", $ids).")";
+	$q = "update product set active = 0, quantity = 0 where zoomos_id not in (".implode(",", $ids).")";
 	executeUpdate($q, $conn);
 
 //	$q = "update product_shop set active = 0 where zoomos_id not in (".implode(",", $ids).")";
