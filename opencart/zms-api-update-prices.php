@@ -43,19 +43,19 @@ foreach ($obj as $key => $row)
 	$price = $row['price'];
 
 	echo $i . ' of '.sizeof($obj). ': ' . $id .  '<br/>';
+	
+	if ($id) {
+		array_push($ids, $id);
+	}
 
 	if ($shopsId) {
 
 		$q = "update ".DB_PREFIX."product set status = ".($status == 1 && $price > 0 ? "1" : "0").", quantity = 100, price = ".$price." where product_id = ".$shopsId;
-		
 		executeUpdate($q, $conn);
 				
 //		$q = "update product_shop set price = ".$price.", wholesale_price = ".$price.", active = ".($status == 1 && $price > 0 ? "1" : "0").", date_upd = current_timestamp where zoomos_id = ".$id;
-		
 //		executeUpdate($q, $conn);
-		
 
-		array_push($ids, $id);
 		array_push($shopsIds, $shopsId);
 	}
 
