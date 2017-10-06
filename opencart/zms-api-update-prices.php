@@ -32,6 +32,7 @@ echo 'Rows count: '.sizeof($obj). '<br/>';
 $i = 0;
 
 $ids = array();
+$shopsIds = array();
 
 foreach ($obj as $key => $row) 
 {
@@ -55,17 +56,25 @@ foreach ($obj as $key => $row)
 		
 
 		array_push($ids, $id);
+		array_push($shopsIds, $shopsId);
 	}
 
 	
 	$i++;
 }
 
-	$q = "update product set active = 0, quantity = 0 where zoomos_id not in (".implode(",", $ids).")";
+/*
+	$q = "update ".DB_PREFIX."product set active = 0, quantity = 0 where zoomos_id not in (".implode(",", $ids).")";
+	executeUpdate($q, $conn);
+	$q = "update ".DB_PREFIX."product_shop set active = 0 where zoomos_id not in (".implode(",", $ids).")";
 	executeUpdate($q, $conn);
 
-//	$q = "update product_shop set active = 0 where zoomos_id not in (".implode(",", $ids).")";
-//	executeUpdate($q, $conn);
+	$q = "update ".DB_PREFIX."product set active = 0, quantity = 0 where product_id not in (".implode(",", $shopsIds).")";
+	executeUpdate($q, $conn);
+	$q = "update ".DB_PREFIX."product_shop set active = 0 where product_id not in (".implode(",", $shopsIds).")";
+	executeUpdate($q, $conn);
+*/
+
 
 
 
