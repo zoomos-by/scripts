@@ -62,20 +62,20 @@ $query_entries="
 SELECT p.virtuemart_product_id as product_id, c.virtuemart_category_id as category_id, pl.product_name, p.published, pp.product_price, cl.category_name, m.file_url as img_url,
 #sku_csv as sku 
 concat(cl.slug, '/', pl.slug, '.php') as product_url
-FROM klzc5_virtuemart_products p 
-left join klzc5_virtuemart_product_categories pc on p.virtuemart_product_id = pc.virtuemart_product_id 
-left join klzc5_virtuemart_products_en_gb pl on pl.virtuemart_product_id = p.virtuemart_product_id 
-left join klzc5_virtuemart_categories c on c.virtuemart_category_id = pc.virtuemart_category_id 
-left join klzc5_virtuemart_categories_en_gb cl on cl.virtuemart_category_id = pc.virtuemart_category_id 
-left join klzc5_virtuemart_product_prices pp on pp.virtuemart_product_id = p.virtuemart_product_id
-left join klzc5_virtuemart_product_medias pm on pm.virtuemart_product_id = p.virtuemart_product_id
-left join klzc5_virtuemart_medias m on m.virtuemart_media_id = pm.virtuemart_media_id and file_type = 'product'
+FROM ".$config->dbprefix."virtuemart_products p 
+left join ".$config->dbprefix."virtuemart_product_categories pc on p.virtuemart_product_id = pc.virtuemart_product_id 
+left join ".$config->dbprefix."virtuemart_products_ru_ru pl on pl.virtuemart_product_id = p.virtuemart_product_id 
+left join ".$config->dbprefix."virtuemart_categories c on c.virtuemart_category_id = pc.virtuemart_category_id 
+left join ".$config->dbprefix."virtuemart_categories_ru_ru cl on cl.virtuemart_category_id = pc.virtuemart_category_id 
+left join ".$config->dbprefix."virtuemart_product_prices pp on pp.virtuemart_product_id = p.virtuemart_product_id
+left join ".$config->dbprefix."virtuemart_product_medias pm on pm.virtuemart_product_id = p.virtuemart_product_id
+left join ".$config->dbprefix."virtuemart_medias m on m.virtuemart_media_id = pm.virtuemart_media_id and file_type = 'product'
 group by p.virtuemart_product_id 
 
 ";
 //cl.slug, '/', 
-//left join klzc5_virtuemart_products_ru_ru pl on pl.virtuemart_product_id = p.virtuemart_product_id 
-//left join klzc5_virtuemart_categories_ru_ru cl on c.virtuemart_category_id = pc.virtuemart_category_id 
+//left join ".$config->dbprefix."virtuemart_products_ru_ru pl on pl.virtuemart_product_id = p.virtuemart_product_id 
+//left join ".$config->dbprefix."virtuemart_categories_ru_ru cl on c.virtuemart_category_id = pc.virtuemart_category_id 
 
 
 $result=mysql_query($query_entries); 
