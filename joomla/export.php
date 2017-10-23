@@ -1,10 +1,8 @@
 <?php 
 require "configuration.php";
 
- // Параметры базы 
 $charset='utf8';
 
- // Пишем запросик для канала 		
 if (isset($_GET['active']))
 {
 	if ($_GET['active']==1) {$filter=" WHERE p.status=1";} else {$filter="";}
@@ -19,11 +17,11 @@ $TableName="export.csv";
 
  // Настройки выходного файла 
 $Fields=array(
-	/* Формат заполнения:  "Название столбца"	=>	"Имя поля в запросе" */
-	/* !!! --- В каком порядке здесь идут столбцы, в таком (слева на право) они и будут на выходе --- !!! */
 	"id"				=>	"id",
 	"category"			=>	"category",
+	"vendor"			=>	"vendor",
 	"model"				=>	"model",
+	"article"			=>	"article",
 	"price"				=>	"price",
 	"status"			=>	"status",
 	"url"				=>	"url",
@@ -51,7 +49,7 @@ $csv_doc[strlen($csv_doc)-1]="\n";
 
 
 //$query_entries="SELECT p.product_id, c.category_id, p.product_name, p.product_publish, pp.product_price, c.category_name, 
-//		concat('http://snoopy.by/components/com_virtuemart/shop_image/product/', p.product_full_image) as product_img_url , product_url
+//		concat('http://yourshop.com/components/com_virtuemart/shop_image/product/', p.product_full_image) as product_img_url , product_url
 //		FROM klzc5_virtuemart_products p 
 //		left join klzc5_k2_tags_xref pc on p.product_id = pc.product_id 
 //		left join klzc5_categories c on c.category_id = pc.category_id 
@@ -59,12 +57,14 @@ $csv_doc[strlen($csv_doc)-1]="\n";
 		
 $query_entries="
 
-SELECT p.virtuemart_product_id as product_id, c.virtuemart_category_id as category_id, pl.product_name, p.published, pp.product_price, cl.category_name, m.file_url as img_url,
+SELECT p.virtuemart_product_id as product_id, c.virtuemart_category_id as category_id, ml.mf_name as vendor, pl.product_name, p.product_sku, p.published, pp.product_price, cl.category_name, m.file_url as img_url,
 #sku_csv as sku 
 concat(cl.slug, '/', pl.slug, '.php') as product_url
 FROM ".$config->dbprefix."virtuemart_products p 
 left join ".$config->dbprefix."virtuemart_product_categories pc on p.virtuemart_product_id = pc.virtuemart_product_id 
 left join ".$config->dbprefix."virtuemart_products_ru_ru pl on pl.virtuemart_product_id = p.virtuemart_product_id 
+left join ".$config->dbprefix."virtuemart_product_manufacturers p2m on p2m.virtuemart_product_id = p.virtuemart_product_id 
+left join ".$config->dbprefix."virtuemart_manufacturers_ru_ru ml on p2m.virtuemart_manufacturer_id = ml.virtuemart_manufacturer_id 
 left join ".$config->dbprefix."virtuemart_categories c on c.virtuemart_category_id = pc.virtuemart_category_id 
 left join ".$config->dbprefix."virtuemart_categories_ru_ru cl on cl.virtuemart_category_id = pc.virtuemart_category_id 
 left join ".$config->dbprefix."virtuemart_product_prices pp on pp.virtuemart_product_id = p.virtuemart_product_id
@@ -90,8 +90,10 @@ $urls=array();
 foreach ($arr as $key => $row) 
 {
 	$csv_doc.= $row['product_id'].';';
-	$csv_doc.= str_replace('"', '""', iconv($charset, 'cp1251', $row['category_name'] )).';';
-	$csv_doc.= str_replace('"', '""', iconv($charset, 'cp1251', $row['product_name'] )).';';
+	$csv_doc.= '"'.str_replace('"', '""', iconv($charset, 'cp1251', $row['category_name'] )).'";';
+	$csv_doc.= '"'.str_replace('"', '""', iconv($charset, 'cp1251', $row['vendor'] )).'";';
+	$csv_doc.= '"'.str_replace('"', '""', iconv($charset, 'cp1251', $row['product_name'] )).'";';
+	$csv_doc.= '"'.str_replace('"', '""', iconv($charset, 'cp1251', $row['product_sku'] )).'";';
 	$csv_doc.= $row['product_price'].';';
 	$csv_doc.= $row['published'].';';
 
