@@ -44,24 +44,24 @@ foreach ($obj as $key => $row)
 
 	if ($id) {
 
-		$q = "update jos_vm_product set product_publish = '".($status == 1 ? "Y" : "N")."' where product_id = ".$id;
+		$q = "update ".$config->dbprefix."product set product_publish = '".($status == 1 ? "Y" : "N")."' where product_id = ".$id;
 		
 		executeUpdate($q, $conn);
 				
-		$q = "update jos_vm_product_price set product_price = ".$price." where product_id = ".$id;
+		$q = "update ".$config->dbprefix."product_price set product_price = ".$price." where product_id = ".$id;
 		
 		executeUpdate($q, $conn);
 
-		$priceRowQ="SELECT * FROM jos_vm_product_price where product_id = ".$id;
+		$priceRowQ="SELECT * FROM ".$config->dbprefix."product_price where product_id = ".$id;
 
 		$result=mysql_query($priceRowQ); 
 		
 		if (mysql_num_rows($result) == 0) {
 
-			$q = "insert into jos_vm_product_price (product_id, product_price, product_currency, mdate, shopper_group_id, product_price_vdate, product_price_edate) 
-			      		values (".$id.", ".$price.", 'BLR', '1415696144', 5, 0, 0)";
+// 			$q = "insert into jos_vm_product_price (product_id, product_price, product_currency, mdate, shopper_group_id, product_price_vdate, product_price_edate) 
+// 			      		values (".$id.", ".$price.", 'BLR', '1415696144', 5, 0, 0)";
 		
-			executeUpdate($q, $conn);
+// 			executeUpdate($q, $conn);
 		}
 
 		
@@ -73,7 +73,7 @@ foreach ($obj as $key => $row)
 	$i++;
 }
 
-	$q = "update jos_vm_product set product_publish = 'N' where product_id not in (".implode(",", $ids).")";
+	$q = "update ".$config->dbprefix."product set product_publish = 'N' where product_id not in (".implode(",", $ids).")";
 	executeUpdate($q, $conn);
 
 
