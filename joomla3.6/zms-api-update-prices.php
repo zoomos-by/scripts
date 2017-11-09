@@ -9,7 +9,7 @@ mysql_select_db($config->db) or die (mysql_error());
 
 
 
-$ZMS_KEY='molotoc.by-HH1lt7VCN'; //zoomos api key
+$ZMS_KEY=''; //zoomos api key
 
 $url = 'http://api.export.zoomos.by/pricelist?key='.$ZMS_KEY;
 
