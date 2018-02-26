@@ -64,14 +64,14 @@ foreach ($obj as $key => $row)
 }
 
 /*
-	$q = "update ".DB_PREFIX."product set active = 0, quantity = 0 where zoomos_id not in (".implode(",", $ids).")";
+	$q = "update ".DB_PREFIX."product set status = 0, quantity = 0 where zoomos_id not in (".implode(",", $ids).")";
 	executeUpdate($q, $conn);
-	$q = "update ".DB_PREFIX."product_shop set active = 0 where zoomos_id not in (".implode(",", $ids).")";
+	$q = "update ".DB_PREFIX."product_shop set status = 0 where zoomos_id not in (".implode(",", $ids).")";
 	executeUpdate($q, $conn);
 
-	$q = "update ".DB_PREFIX."product set active = 0, quantity = 0 where product_id not in (".implode(",", $shopsIds).")";
+	$q = "update ".DB_PREFIX."product set status = 0, quantity = 0 where product_id not in (".implode(",", $shopsIds).")";
 	executeUpdate($q, $conn);
-	$q = "update ".DB_PREFIX."product_shop set active = 0 where product_id not in (".implode(",", $shopsIds).")";
+	$q = "update ".DB_PREFIX."product_shop set status = 0 where product_id not in (".implode(",", $shopsIds).")";
 	executeUpdate($q, $conn);
 */
 
