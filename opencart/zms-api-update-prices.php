@@ -11,7 +11,7 @@ $conn=mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die ("Íå ìîã�
 mysql_select_db(DB_DATABASE) or die (mysql_error());
 
 $ZMS_KEY = ''; //zoomos api key
-$url = 'http://api.export.zoomos.by/pricelist?key='.$ZMS_KEY;
+$url = 'https://api.zoomos.by/pricelist?key='.$ZMS_KEY;
 
 echo 'Downloading JSON from '.$url. '<br/>';
 
